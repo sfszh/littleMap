@@ -81,14 +81,23 @@ public class MapLoader : MonoBehaviour {
 		// |
 		// |
 		// E(x)
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConvex_SW),new Tile(0,TileType.CornerConvex_NW),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.Edge_S),new Tile(0,TileType.Edge_N),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConvex_SE),new Tile(0,TileType.CornerConvex_NE),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConcave_SW),new Tile(0,TileType.CornerConcave_NW),new Tile((float)0.5,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConcave_SE),new Tile(0,TileType.CornerConcave_NE),new Tile((float)0.5,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		//{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		{new Tile((float)0.0,TileType.Flat),new Tile((float)0.0,TileType.Flat),new Tile((float)0.0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		{new Tile((float)0.0,TileType.Flat),new Tile((float)0.0,TileType.CornerConvex_NE),new Tile((float)0.0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		{new Tile((float)0.0,TileType.Flat),new Tile((float)1.0,TileType.Flat),new Tile((float)0.0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
 		{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
-		{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConvex_SW),new Tile(0,TileType.CornerConvex_NW),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
-		{new Tile(0,TileType.Flat),new Tile(0,TileType.Edge_S),new Tile(0,TileType.Edge_N),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
-		{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConvex_SE),new Tile(0,TileType.CornerConvex_NE),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
 		{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
-		{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConcave_SW),new Tile(0,TileType.CornerConcave_NW),new Tile((float)0.5,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
-		{new Tile(0,TileType.Flat),new Tile(0,TileType.CornerConcave_SE),new Tile(0,TileType.CornerConcave_NE),new Tile((float)0.5,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile((float)0.7,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
 		{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+		{new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat),new Tile(0,TileType.Flat)},
+
 	};
 	
 	//datas put into mesh
@@ -207,27 +216,34 @@ public class MapLoader : MonoBehaviour {
 	
 	public int GetSpecialTiles(ref Map map)
 	{
-		
 	    for(int i = 0; i < map.Size.x-1; i++)
 	    {
 	        for( int j = 0; j < map.Size.y -1; j++)
 	        {
 				if(map.tile[i,j].tileType != TileType.Flat)
 				{
-					Mesh meshTile = GenSpecialTile(map.tile[i,j].tileType,i,j).GetComponent<MeshFilter>().mesh;
+					Transform tranTile = GenSpecialTile(map.tile[i,j].tileType,i,j); // this transform contains mesh of the tile
+					Mesh meshTile =  tranTile.GetComponent<MeshFilter>().mesh;
 					Vector3[] verts = meshTile.vertices;
+					
+					Debug.Log ("vertices num: "+verts.Length);
 					for(int iVert = 0; iVert < verts.Length; iVert++)
 					{
 						//it local coordinate system so:
 						// x means x; y means z; z means y in world coordinate;
-						float xTile = verts[iVert].x;
-						float yTile = verts[iVert].y;
-						Debug.Log ("before: "+verts[iVert]);
-						verts[iVert].z += (1 -xTile)*(1-yTile)*map.tile[i,j].height + (1-xTile)*yTile*map.tile[i,j+1].height + xTile*(1-yTile)*map.tile[i+1,j].height +xTile*yTile*map.tile[i+1,j+1].height;
-								
-						Debug.Log ("after: "+verts[iVert]);
+						Vector3 vGloble = tranTile.TransformPoint(verts[iVert]); // temp variable of each vertice from mesh;
+						// first we get the decimal part of x and y
+						float xTile = tranTile.TransformPoint(verts[iVert]).x - i*TILE_SIZE;//Mathf.Floor(tranTile.TransformPoint(verts[iVert]).x);
+						float yTile = tranTile.TransformPoint(verts[iVert]).z - j*TILE_SIZE;//Mathf.Floor(tranTile.TransformPoint(verts[iVert]).z);
+						Debug.Log ("globle vector :" + tranTile.TransformPoint(verts[iVert]));
+						Debug.Log ("x :" + xTile + "z :" + yTile);
+						//bilinearly interpolated
+						//Debug.Log ();
+						vGloble.y += (1 -xTile)*(1-yTile)*map.tile[i,j].height + (1-xTile)*yTile*map.tile[i,j+1].height + xTile*(1-yTile)*map.tile[i+1,j].height + xTile*yTile*map.tile[i+1,j+1].height;
+						verts[iVert] = tranTile.InverseTransformPoint(vGloble);
 					}
-					meshTile.RecalculateBounds (); 
+					meshTile.vertices = verts;
+					meshTile.RecalculateBounds(); 
 				}
 			}
 		}
