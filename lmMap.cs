@@ -199,76 +199,7 @@ public class lmMap{
 			return null;
 		}			
 	}
-	//	if(type != TileType.Flat)
-	//	{
-	//		switch(type)
-	//		{
-	//		case TileType.CornerConvex_SW:
-	//			pfTile.Rotate(0,0,-180);
-	//			specialTile = Transform.Instantiate(pfTile, vPos, Cliff_Convex);
-	//			//pfTile.Rotate(0,0,180);
-	//			break;
-	//		case TileType.CornerConvex_NW:
-	//			pfTile.Rotate(0,0,-90);
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Convex) as Transform;
-	//			//pfTile.Rotate(0,0,90);
-	//			break;
-	//		case TileType.CornerConvex_NE:
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Convex) as Transform;
-	//			break;
-	//		case TileType.CornerConvex_SE:
-	//			pfTile.Rotate(0,0,90);
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Convex) as Transform;
-	//			//pfTile.Rotate(0,0,-90);
-	//			break;
-	//		case TileType.Edge_N:
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Concave)as Transform;
-	//			break;
-	//		case TileType.Edge_S:
-	//			pfTile.Rotate(0,0,180);
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Concave)as Transform;
-	//			//pfTile.Rotate(0,0,-180);
-	//			break;
-	//		case TileType.Edge_W:
-	//			pfTile.Rotate(0,0,90);
-	//			specialTile = Instantiate(pfTile, vPos, Cliff_Concave)as Transform;// as Transform;
-	//			//pfTile.Rotate(0,0,-90); 
-	//			break;
-	//		case TileType.Edge_E:
-	//			pfTile.Rotate(0,0,-90);
-	//			specialTile = Instantiate(pfTile, vPos, pfTile.rotation)as Transform;
-	//			//pfTile.Rotate(0,0,90);
-	//			break;
-	//		case TileType.CornerConcave_SW:
-	//			pfTile.Rotate(0,0,-180);
-	//			specialTile = Instantiate(pfTile, vPos, pfTile.rotation)as Transform;
-	//			//pfTile.Rotate(0,0,180);
-	//			break;
-	//		case TileType.CornerConcave_NW:
-	//			pfTile.Rotate(0,0,-90);				
-	//			specialTile = Instantiate(pfTile, vPos, pfTile.rotation)as Transform;
-	//			//pfTile.Rotate(0,0,90);
-	//			break;
-	//		case TileType.CornerConcave_NE:
-	//			specialTile = Instantiate(pfTile, vPos, pfTile.rotation)as Transform;
-	//			break;
-	//		case TileType.CornerConcave_SE:
-	//			pfTile.Rotate(0,0,90);
-	//			specialTile = Instantiate(pfTile, vPos, pfTile.rotation)as Transform;
-	//			//pfTile.Rotate(0,0,-90);
-	//			break;
-	//		default:
-	//			Debug.Log("Tile has not been implemented yet");
-	//			break;
-	//		}
-	//		/**set the parent of specialTile to map*/
-	//		if(specialTile != null)
-	//		{
-	//			specialTile.parent = goParent.transform;
-	//		}
-	//	}
-	//	return specialTile;
-	//}
+
 	public int GetTriangles()
 	{
 	    for(int i = 0; i < map.Size.x-1; i++)
@@ -296,7 +227,10 @@ public class lmMap{
 	    return 0;
 	}
 	
-	
+	//TODO
+	//change to vPos to pPos
+	//public int TransformTile(Point2 Pos,Transform tranTile)
+	//
 	public int GetSpecialTiles(GameObject parent)
 	{
 //		Transform specTile = new Transform; // temp memory holder of special Tile
