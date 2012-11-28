@@ -5,25 +5,24 @@ using System.Collections;
  * +x East
  * +z North
  * +y Up*/
-
 public enum TileType
 {
 	None,			//Uninitialized
 	Empty,			//Empty for special structure
     Flat,
 	//deprecate
-    CornerConcave_SW,	//North
-	CornerConcave_NW,	//South
-	CornerConcave_NE,	//West
-	CornerConcave_SE,	//East
-    CornerConvex_SW,
-	CornerConvex_NW,
-	CornerConvex_NE,
-	CornerConvex_SE,
-    Edge_N,
-	Edge_S,
-	Edge_W,
-	Edge_E,
+    //CornerConcave_SW,	//North
+	//CornerConcave_NW,	//South
+	//CornerConcave_NE,	//West
+	//CornerConcave_SE,	//East
+    //CornerConvex_SW,
+	//CornerConvex_NW,
+	//CornerConvex_NE,
+	//CornerConvex_SE,
+    //Edge_N,
+	//Edge_S,
+	//Edge_W,
+	//Edge_E,
 	//deprecate
 	CornerConcave,
 	CornerConvex,
@@ -59,7 +58,7 @@ public struct Tile
 	}
 }
 
-// the size of map
+// the size and position of map
 public struct Point2
 {
     public int x,y;
@@ -82,3 +81,32 @@ public struct Map
     }
 }
 
+//
+public enum BrushType
+{
+	None, 	//*Not defined
+	Empty,	//*
+	Flat,	//*	
+	LowLand1,
+	LowLand2,
+	HighLand1,//*	
+	HighLand2,
+	Slop,
+	WaterShallow,
+	WaterDeep,
+}
+
+//
+public enum BrushSize
+{
+	One,
+	Two,
+	Three,
+}
+
+//
+public enum BrushShape
+{
+	Round,
+	Square,
+}
