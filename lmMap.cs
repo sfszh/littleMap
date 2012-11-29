@@ -19,6 +19,7 @@ public class lmMap: MonoBehaviour{
 	private Transform specialTile;
 	private Transform prefabTile;
 	const int TILE_SIZE = 1;
+	const int SPECIAL_TILE_HEIGHT = 1;
 	//public lmMap(Tile[,] data, Point2 size) 
 	//{
 	//	map.tile = data;
@@ -54,7 +55,7 @@ public class lmMap: MonoBehaviour{
 		{
 			new Tile(0,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Edge,Orientation.S),
-			new Tile(0,TileType.Edge,Orientation.N),
+			new Tile(1,TileType.Edge,Orientation.N),
 			new Tile(1,TileType.Flat,Orientation.None),
 			new Tile(1,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
@@ -81,7 +82,7 @@ public class lmMap: MonoBehaviour{
 		{
 			new Tile(0,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.CornerConcave,Orientation.SW),
-			new Tile(0,TileType.CornerConcave,Orientation.NW),
+			new Tile(1,TileType.CornerConcave,Orientation.NW),
 			new Tile((float)0.5,TileType.Flat,Orientation.None),
 			new Tile((float)0.7,TileType.Flat,Orientation.None),
 			new Tile((float)0.7,TileType.Flat,Orientation.None),
@@ -89,9 +90,9 @@ public class lmMap: MonoBehaviour{
 			new Tile(0,TileType.Flat,Orientation.None)},
 		{
 			new Tile(0,TileType.Flat,Orientation.None),
-			new Tile(0,TileType.CornerConcave,Orientation.SE),
-			new Tile(0,TileType.CornerConcave,Orientation.NE),
-			new Tile((float)0.5,TileType.Flat,Orientation.None),
+			new Tile(1,TileType.CornerConcave,Orientation.SE),
+			new Tile(1,TileType.CornerConcave,Orientation.NE),
+			new Tile((float)1.0,TileType.Flat,Orientation.None),
 			new Tile((float)0.7,TileType.Flat,Orientation.None),
 			new Tile((float)0.7,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
@@ -99,7 +100,7 @@ public class lmMap: MonoBehaviour{
 		{
 			new Tile(0,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
-			new Tile(0,TileType.Flat,Orientation.None),
+			new Tile(1,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
 			new Tile(0,TileType.Flat,Orientation.None),
@@ -143,12 +144,16 @@ public class lmMap: MonoBehaviour{
 		{
 		case Orientation.SW:
 			rotation = Quaternion.Euler(Cliff_Concave.eulerAngles.x + 0,Cliff_Concave.eulerAngles.y+0,Cliff_Concave.eulerAngles.z-180);
+
 			return Transform.Instantiate(Cliff_Concave,vPos,rotation) as Transform;
 		case Orientation.NW:
 			rotation = Quaternion.Euler(Cliff_Concave.eulerAngles.x + 0,Cliff_Concave.eulerAngles.y+0,Cliff_Concave.eulerAngles.z-90);
 			return Transform.Instantiate(Cliff_Concave,vPos,rotation) as Transform;
 		case Orientation.NE:
 			rotation = Quaternion.Euler(Cliff_Concave.eulerAngles);//
+			//map.tile[Pos.x,Pos.y].height += SPECIAL_TILE_HEIGHT;
+			//map.tile[Pos.x+1,Pos.y].height += SPECIAL_TILE_HEIGHT;
+			//map.tile[Pos.x,Pos.y+1].height += SPECIAL_TILE_HEIGHT;
 			return Transform.Instantiate(Cliff_Concave,vPos,rotation) as Transform;
 		case Orientation.SE:
 			rotation = Quaternion.Euler(Cliff_Concave.eulerAngles.x+0,Cliff_Concave.eulerAngles.y+0,Cliff_Concave.eulerAngles.z + 90);
@@ -235,34 +240,129 @@ public class lmMap: MonoBehaviour{
 	    return 0;
 	}
 	
-	//TODO
-	//change to vPos to pPos
+	//Tranform a special Tile to fit elvation of terrain
+	//The Offsets is used to sooth difference of side of edge
 	public int TransformTile(Point2 Pos,ref Transform tranTile)
 	{
 		Mesh meshTile =  tranTile.GetComponent<MeshFilter>().mesh;
 		Vector3[] verts = meshTile.vertices;
+		TileOffsets offsets ;//= new TileOffsets(0,0,0,0); //the Offsets around one
+		//offsets.Set(1.0f,1.0f,1.0f,1.0f);
 		for(int iVert = 0; iVert < verts.Length; iVert++)
 		{
 			//it local coordinate system so:
 			// x means x; y means z; z means y in world coordinate;
 			Vector3 vGloble = tranTile.TransformPoint(verts[iVert]); // temp variable of each vertice from mesh;
 			// first we get the decimal part of x and y
-			float xTile = tranTile.TransformPoint(verts[iVert]).x - Pos.x*TILE_SIZE;//Mathf.Floor(tranTile.TransformPoint(verts[iVert]).x);
-			float yTile = tranTile.TransformPoint(verts[iVert]).z - Pos.y*TILE_SIZE;//Mathf.Floor(tranTile.TransformPoint(verts[iVert]).z);
+			float xTile = tranTile.TransformPoint(verts[iVert]).x - Pos.x*TILE_SIZE;
+			float yTile = tranTile.TransformPoint(verts[iVert]).z - Pos.y*TILE_SIZE;
 			//Debug.Log ("globle vector :" + tranTile.TransformPoint(verts[iVert]));
 			//Debug.Log ("x :" + xTile + "z :" + yTile);
 			
+			switch(map.tile[Pos.x,Pos.y].tileType)
+			{
+			case TileType.CornerConcave:
+				GetOffsetsConcave(map.tile[Pos.x,Pos.y].ori,out offsets);
+				break;
+			case TileType.CornerConvex:
+				 GetOffsetsConvex(map.tile[Pos.x,Pos.y].ori,out offsets);
+				break;
+			case TileType.Edge:
+				 GetOffsetsEdge(map.tile[Pos.x,Pos.y].ori,out offsets);
+				break;
+			default:
+				GetOffsetsConcave(map.tile[Pos.x,Pos.y].ori,out offsets);
+				Debug.Log("TransformTile:Unkown type of" +map.tile[Pos.x,Pos.y].tileType);
+				break;
+			}
 			//bilinearly interpolated
-			vGloble.y += (1 - xTile)*(1-yTile)*map.tile[Pos.x,Pos.y].height + 
-						 (1 - xTile)*yTile*map.tile[Pos.x,Pos.y+1].height + 
-						 xTile*(1-yTile)*map.tile[Pos.x+1,Pos.y].height + 
-						 xTile*yTile*map.tile[Pos.x+1,Pos.y+1].height;
+			vGloble.y += (1 - xTile) * (1-yTile) * ( map.tile[Pos.x,Pos.y].height     + offsets.sw) + 
+						 (1 - xTile) *  yTile    * ( map.tile[Pos.x,Pos.y+1].height   + offsets.nw) + 
+						 xTile       * (1-yTile) * ( map.tile[Pos.x+1,Pos.y].height   + offsets.se) + 
+						 xTile       *  yTile    * ( map.tile[Pos.x+1,Pos.y+1].height + offsets.ne);
 			
 			verts[iVert] = tranTile.InverseTransformPoint(vGloble);
 		}
 		meshTile.vertices = verts;	
 		return 0;
 	}
+	
+	//Get Height Offsets Around Concave
+	private int GetOffsetsConcave(Orientation Ori, out TileOffsets Offets)
+	{
+		Offets=new TileOffsets();
+		switch(Ori)
+		{
+		case Orientation.SW:
+
+			Offets.Set(0,-1.0f,-1.0f,-1.0f);
+			break;
+		case Orientation.NW:
+			Offets.Set(-1.0f,0,-1.0f,-1.0f);
+			break;
+		case Orientation.NE:
+			Offets.Set(-1.0f,-1.0f,0,-1.0f);
+			break;
+		case Orientation.SE:
+			Offets.Set(-1.0f,-1.0f,-1.0f,0);
+			break;
+		default:
+			Debug.Log("GetOffsetsConcave: Don't know this Orientation"+ Ori);
+			break;			
+		}
+		return 0;
+	}
+	
+	//Get Height Offsets Around Convex
+	private int GetOffsetsConvex(Orientation Ori, out TileOffsets Offets)
+	{
+		Offets=new TileOffsets();
+		switch(Ori)
+		{
+		case Orientation.SW:
+			Offets.Set(0,0,-1.0f,0); //NE
+			break;
+		case Orientation.NW:
+			Offets.Set(0,0,0,-1.0f); //SE
+			break;
+		case Orientation.NE:
+			Offets.Set(-1.0f,0,0,0); //SW
+			break;
+		case Orientation.SE:
+			Offets.Set(0,-1.0f,0,0); //NW	
+			break;
+		default:
+			Debug.Log("GetOffsetsConcave: Don't know this Orientation"+ Ori);
+			break;			
+		}
+		return 0;
+	}
+	
+	//Get Height Offsets Around Edge
+	private int GetOffsetsEdge(Orientation Ori, out TileOffsets Offets)
+	{
+		Offets=new TileOffsets();
+		switch(Ori)
+		{
+		case Orientation.N:
+			Offets.Set(-1.0f,0,0,-1.0f);
+			break;
+		case Orientation.S:
+			Offets.Set(0,-1.0f,-1.0f,0);
+			break;
+		case Orientation.W:
+			Offets.Set(0,0,-1.0f,-1.0f);
+			break;
+		case Orientation.E:
+			Offets.Set(-1.0f,-1.0f,0,0);
+			break;
+		default:
+			Debug.Log("GetOffsetsConcave: Don't know this Orientation"+ Ori);
+			break;			
+		}
+		return 0;
+	}
+	
 	
 	
 	//
@@ -300,29 +400,11 @@ public class lmMap: MonoBehaviour{
 						Debug.Log("Don't know this type");
 						break;
 					}
-					//vPos.Set((i+0.5f) * TILE_SIZE, 0, (j+0.5f)* TILE_SIZE);
+
 					Transform specTile = InstSpecialTile(new Point2(i,j),map.tile[i,j].ori); // this transform contains mesh of the tile
-					specTile.parent = parent.transform;
-					//Mesh meshTile =  specTile.GetComponent<MeshFilter>().mesh;
-					//Vector3[] verts = meshTile.vertices;
-					//
-					////Debug.Log ("vertices num: "+verts.Length);
-					//for(int iVert = 0; iVert < verts.Length; iVert++)
-					//{
-					//	//it local coordinate system so:
-					//	// x means x; y means z; z means y in world coordinate;
-					//	Vector3 vGloble = specTile.TransformPoint(verts[iVert]); // temp variable of each vertice from mesh;
-					//	// first we get the decimal part of x and y
-					//	float xTile = specTile.TransformPoint(verts[iVert]).x - i*TILE_SIZE;//Mathf.Floor(specTile.TransformPoint(verts[iVert]).x);
-					//	float yTile = specTile.TransformPoint(verts[iVert]).z - j*TILE_SIZE;//Mathf.Floor(specTile.TransformPoint(verts[iVert]).z);
-					//	//Debug.Log ("globle vector :" + specTile.TransformPoint(verts[iVert]));
-					//	//Debug.Log ("x :" + xTile + "z :" + yTile);
-					//	//bilinearly interpolated
-					//	vGloble.y += (1 -xTile)*(1-yTile)*map.tile[i,j].height + (1-xTile)*yTile*map.tile[i,j+1].height + xTile*(1-yTile)*map.tile[i+1,j].height + xTile*yTile*map.tile[i+1,j+1].height;
-					//	verts[iVert] = specTile.InverseTransformPoint(vGloble);
-					//}
-					//meshTile.vertices = verts;
 					TransformTile(new Point2(i,j),ref specTile);
+					
+					specTile.parent = parent.transform;
 					specTile.gameObject.isStatic = true; // set to static
 				}
 			}

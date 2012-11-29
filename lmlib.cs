@@ -96,6 +96,34 @@ public enum BrushType
 	WaterDeep,
 }
 
+struct TileOffsets
+{
+	public float sw;
+	public float nw;
+	public float ne;
+	public float se;
+	public TileOffsets(float sw,float nw,float ne,float se)
+	{
+		this.sw = sw;
+		this.nw = nw;
+		this.ne = ne;
+		this.se = se;	
+	}
+	public void Reset()
+	{
+		sw = 0;
+		nw = 0;
+		ne = 0;
+		se = 0;
+	}
+	public void Set(float SW,float NW,float NE,float SE)
+	{
+		sw = SW;
+		nw = NW;
+		ne = NE;
+		se = SE;
+	}
+}
 //
 public enum BrushSize
 {
