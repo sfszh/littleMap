@@ -468,7 +468,7 @@ public class lmMap: MonoBehaviour{
 		return 0;
 	}
 	// this should be executed before start()
-	void OnEnable() {
+	public void OnEnable() {
 		map.tile = MapDataRaw;
 		map.Size = new Point2(8,8);
 	}

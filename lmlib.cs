@@ -96,6 +96,21 @@ public enum BrushType
 	WaterDeep,
 }
 
+//
+public enum BrushSize
+{
+	One,
+	Two,
+	Three,
+}
+
+//
+public enum BrushShape
+{
+	Round,
+	Square,
+}
+
 struct TileOffsets
 {
 	public float sw;
@@ -123,18 +138,4 @@ struct TileOffsets
 		ne = NE;
 		se = SE;
 	}
-}
-//
-public enum BrushSize
-{
-	One,
-	Two,
-	Three,
-}
-
-//
-public enum BrushShape
-{
-	Round,
-	Square,
 }

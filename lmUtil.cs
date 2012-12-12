@@ -15,7 +15,7 @@ public class lmUtil : MonoBehaviour {
 	void Update () {
 	}
 	
-	void OnPostRender(){
+	void OnPostRender(){ //OnPostRender
 		//Debug.Log("hahaahhahaha");
 		//lmMap map = (lmMap)gameObject.GetComponent(typeof(lmMap));
 		map.DrawGrid(0.01f,mat);
